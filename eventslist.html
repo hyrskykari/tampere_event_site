@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tampere Event Finder</title>
+
+<style>
+#searchitems li {
+	display: inline-block;
+	margin-right: 20px;
+	padding: 5px 10px; 
+	background-color: white;
+	color: black !important;
+	text-decoration: none;
+}
+
+#searchitems li a:hover {
+	background-color: rgb(110,138,195);
+	color: white !important;	
+}
+#headlines .eventitem {
+	margin-top: 10px;
+	padding: 20px;
+	border: 1px solid white;	
+}
+#map, #headlines{
+	display:inline-block;
+	border-style: dotted;
+	border-width: 2px;
+	background-color: red;
+}
+#map{
+	width: 55%;
+}
+
+#headlines{
+	width: 40%;
+}
+.singleitem{
+
+    border-radius: 25px;
+    background: #73AD21;
+   height: 200px;
+    width: 80%;
+   margin: auto;
+}
+</style>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script>
+var events;
+
+$(document).ready(function() {
+	$('#searchitems li').click(function(){
+		$.getJSON("http://visittampere.fi:80/api/search","type=event&text=music&limit=5",function (data){
+		// save the list of events
+		// no real change - just want to force new git commit
+		events = data;
+		 var infoHTML = "";
+		 //output summary of each event to a singleitem element
+		 $.each(data, function(event,eventInfo){
+		 infoHTML = "";
+		 infoHTML += "<div class = 'singleitem'>";
+		 infoHTML += "<h1>" + eventInfo.title +"</h1>";
+		 infoHTML += "<p class = 'address' >" + eventInfo.contact_info.address + "</p>";
+		 infoHTML += "<p class = 'description'>" + "more event information" + "</p>";
+		 infoHTML += "</div>";
+		 $("#headlines").append(infoHTML);
+		  }); // end of each()
+		 
+		});// end of getJSON
+		return false;
+	}); // end click
+	
+}); // end ready
+
+</script>
+</head>
+<body>
+<header>
+    TAMPERE EVENT FINDER - WHAT'S ON
+</header>
+	<div class="content">
+		<div class="main">
+			<h1>Search for</h1>
+			<p> here's an insert to see how git treats it</p>
+			<ul id="searchitems">
+			<li>Events</li>
+			<li>Locations</li>
+			<li>Articles</li>
+			</ul>
+		</div>
+		<div id="map">&nbsp;</div>	
+		<div id="headlines">
+			
+		</div>
+		
+		
+	</div>
+<footer>
+ 
+</footer>
+
+</body>
+</html>
