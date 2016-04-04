@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Tampere Event Finder</title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
+    <title>Tampere Event Finder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">    
+    <link rel="stylesheet" href="css/eventslist.css">
+
+<!--style>
 
 body {
   font:  14px "Trebuchet MS", "Helvetica Bold", sans-serif;
@@ -65,61 +70,38 @@ h2 {
 	padding-left: 10px;
 	padding-right: 10px;
 }
-</style>
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-<script>
-var events;
+</style-->
 
-$(document).ready(function() {
-	$('#searchitems li').click(function(){
-		$.getJSON("http://visittampere.fi:80/api/search","type=event&text=music&limit=5",function (data){
-		// save the list of events
-		// no real change - just want to force new git commit
-		events = data;
-		 var infoHTML = "";
-		 //output summary of each event to a singleitem element
-		 $.each(data, function(event,eventInfo){
-		 infoHTML = "";
-		 infoHTML += "<div class = 'singleitem'>";
-		 infoHTML += "<h1>" + eventInfo.title +"</h1>";
-		 infoHTML += "<p class = 'address' >" + eventInfo.contact_info.address + "</p>";
-		 infoHTML += "<p class = 'description'>" + "more event information" + "</p>";
-		 infoHTML += "</div>";
-		 $("#headlines").append(infoHTML);
-		  }); // end of each()
-		 
-		});// end of getJSON
-		return false;
-	}); // end click
-	
-}); // end ready
-
-</script>
 </head>
 <body>
-<header>
-    TAMPERE EVENT FINDER - WHAT'S ON
-</header>
-	<div class="content">
-		<div class="main">
-			<h1>Search for</h1>
-			<p> here's an insert to see how git treats it</p>
-			<ul id="searchitems">
-			<li>Events</li>
-			<li>Locations</li>
-			<li>Articles</li>
-			</ul>
+	<div class="container">
+    <h1 class="text-center jumbotron">TAMPERE EVENT FINDER - WHAT'S ON</h1>
+
+		<div id="map" class="col-md-8">
 		</div>
-		<div id="map">&nbsp;</div>	
-		<div id="headlines">
+    <!--
+		<div class="col-md-6" class="jumbotron">
+      <h1 id="events">Tampere events</h1>
+      <div id="headlines" class="jumbotron">
+ 			</div>
+		</div> -->
+
+		<div class="col-md-4">
+      <h1 id="events">Tampere events</h1>
+      <div id="headlines" class="jumbotron">
+ 			</div>
+		</div>
 			
-		</div>
-		
-		
 	</div>
-<footer>
+	
+  <footer>
  
-</footer>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="js/eventslist.js"></script>
 
 </body>
+
 </html>
